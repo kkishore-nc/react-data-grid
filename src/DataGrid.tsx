@@ -177,6 +177,7 @@ export interface DataGridProps<R, SR = unknown, K extends Key = Key> extends Sha
   rowClass?: Maybe<(row: R) => Maybe<string>>;
   direction?: Maybe<Direction>;
   'data-testid'?: Maybe<string>;
+  moreProps?: object | undefined;
 }
 
 /**
@@ -229,7 +230,8 @@ function DataGrid<R, SR, K extends Key>(
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
-    'data-testid': testId
+    'data-testid': testId,
+    moreProps
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
 ) {
@@ -953,6 +955,7 @@ function DataGrid<R, SR, K extends Key>(
         row={row}
         onRowChange={onRowChange}
         closeEditor={closeEditor}
+        moreProps={moreProps}
       />
     );
   }
@@ -1039,6 +1042,7 @@ function DataGrid<R, SR, K extends Key>(
             isRowSelected={isGroupRowSelected}
             selectGroup={selectGroupLatest}
             toggleGroup={toggleGroupLatest}
+            moreProps={moreProps}
           />
         );
         continue;
@@ -1081,6 +1085,7 @@ function DataGrid<R, SR, K extends Key>(
           selectCell={selectViewportCellLatest}
           selectedCellDragHandle={getDragHandle(rowIdx)}
           selectedCellEditor={getCellEditor(rowIdx)}
+          moreProps={moreProps}
         />
       );
     }
@@ -1174,6 +1179,7 @@ function DataGrid<R, SR, K extends Key>(
           selectCell={selectHeaderCellLatest}
           shouldFocusGrid={!selectedCellIsWithinSelectionBounds}
           direction={direction}
+          moreProps={moreProps}
         />
         {rows.length === 0 && noRowsFallback ? (
           noRowsFallback
@@ -1208,6 +1214,7 @@ function DataGrid<R, SR, K extends Key>(
                   lastFrozenColumnIndex={lastFrozenColumnIndex}
                   selectedCellIdx={isSummaryRowSelected ? selectedPosition.idx : undefined}
                   selectCell={selectSummaryCellLatest}
+                  moreProps={moreProps}
                 />
               );
             })}

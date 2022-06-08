@@ -33,6 +33,7 @@ interface EditCellProps<R, SR>
   extends Omit<EditorProps<R, SR>, 'onClose'>,
     SharedCellRendererProps<R, SR> {
   closeEditor: () => void;
+  moreProps?: object | undefined;
 }
 
 export default function EditCell<R, SR>({
@@ -40,7 +41,8 @@ export default function EditCell<R, SR>({
   colSpan,
   row,
   onRowChange,
-  closeEditor
+  closeEditor,
+  moreProps
 }: EditCellProps<R, SR>) {
   const frameRequestRef = useRef<number | undefined>();
   const commitOnOutsideClick = column.editorOptions?.commitOnOutsideClick !== false;
@@ -116,9 +118,21 @@ export default function EditCell<R, SR>({
     >
       {column.editor != null && (
         <>
-          <column.editor column={column} row={row} onRowChange={onRowChange} onClose={onClose} />
+          <column.editor
+            column={column}
+            row={row}
+            onRowChange={onRowChange}
+            onClose={onClose}
+            moreProps={moreProps}
+          />
           {column.editorOptions?.renderFormatter && (
-            <column.formatter column={column} row={row} isCellSelected onRowChange={onRowChange} />
+            <column.formatter
+              column={column}
+              row={row}
+              isCellSelected
+              onRowChange={onRowChange}
+              moreProps={moreProps}
+            />
           )}
         </>
       )}

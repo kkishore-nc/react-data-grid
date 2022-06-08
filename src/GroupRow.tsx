@@ -25,6 +25,7 @@ export interface GroupRowRendererProps<R, SR>
   isRowSelected: boolean;
   selectGroup: (rowIdx: number) => void;
   toggleGroup: (expandedGroupId: unknown) => void;
+  moreProps: object | undefined;
 }
 
 const groupRow = css`
@@ -54,6 +55,7 @@ function GroupedRow<R, SR>({
   isRowSelected,
   selectGroup,
   toggleGroup,
+  moreProps,
   ...props
 }: GroupRowRendererProps<R, SR>) {
   // Select is always the first column
@@ -93,6 +95,7 @@ function GroupedRow<R, SR>({
             row={row}
             groupColumnIndex={idx}
             toggleGroup={toggleGroup}
+            moreProps={moreProps}
           />
         ))}
       </div>

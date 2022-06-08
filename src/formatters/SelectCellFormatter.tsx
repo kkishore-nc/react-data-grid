@@ -8,6 +8,7 @@ interface SelectCellFormatterProps extends SharedInputProps {
   isCellSelected: boolean;
   value: boolean;
   onChange: (value: boolean, isShiftClick: boolean) => void;
+  moreProps?: object | undefined;
 }
 
 export function SelectCellFormatter({

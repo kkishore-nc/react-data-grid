@@ -29,7 +29,8 @@ export default function HeaderRenderer<R, SR>({
   sortDirection,
   priority,
   onSort,
-  isCellSelected
+  isCellSelected,
+  moreProps
 }: HeaderRendererProps<R, SR>) {
   if (!column.sortable) return <>{column.name}</>;
 
@@ -39,6 +40,7 @@ export default function HeaderRenderer<R, SR>({
       sortDirection={sortDirection}
       priority={priority}
       isCellSelected={isCellSelected}
+      moreProps={moreProps}
     >
       {column.name}
     </SortableHeaderCell>
@@ -52,6 +54,7 @@ type SharedHeaderCellProps<R, SR> = Pick<
 
 interface SortableHeaderCellProps<R, SR> extends SharedHeaderCellProps<R, SR> {
   children: React.ReactNode;
+  moreProps: object | undefined;
 }
 
 function SortableHeaderCell<R, SR>({
@@ -59,7 +62,8 @@ function SortableHeaderCell<R, SR>({
   sortDirection,
   priority,
   children,
-  isCellSelected
+  isCellSelected,
+  moreProps
 }: SortableHeaderCellProps<R, SR>) {
   const SortIcon = useDefaultComponents<R, SR>()!.sortIcon!;
   const { ref, tabIndex } = useFocusRef<HTMLSpanElement>(isCellSelected);
@@ -86,7 +90,7 @@ function SortableHeaderCell<R, SR>({
     >
       <span className={headerSortNameClassname}>{children}</span>
       <span>
-        <SortIcon sortDirection={sortDirection} />
+        <SortIcon moreProps={moreProps} sortDirection={sortDirection} />
         {priority}
       </span>
     </span>

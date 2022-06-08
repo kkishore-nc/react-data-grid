@@ -15,6 +15,7 @@ interface GroupCellProps<R, SR> extends SharedGroupRowRendererProps<R, SR> {
   row: GroupRow<R>;
   isCellSelected: boolean;
   groupColumnIndex: number;
+  moreProps?: object | undefined;
 }
 
 function GroupCell<R, SR>({
@@ -26,7 +27,8 @@ function GroupCell<R, SR>({
   column,
   row,
   groupColumnIndex,
-  toggleGroup: toggleGroupWrapper
+  toggleGroup: toggleGroupWrapper,
+  moreProps
 }: GroupCellProps<R, SR>) {
   const { ref, tabIndex, onFocus } = useRovingCellRef(isCellSelected);
 
@@ -62,6 +64,7 @@ function GroupCell<R, SR>({
           isExpanded={isExpanded}
           isCellSelected={isCellSelected}
           toggleGroup={toggleGroup}
+          moreProps={moreProps}
         />
       )}
     </div>

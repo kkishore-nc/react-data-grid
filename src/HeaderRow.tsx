@@ -23,6 +23,7 @@ export interface HeaderRowProps<R, SR, K extends React.Key> extends SharedDataGr
   selectedCellIdx: number | undefined;
   shouldFocusGrid: boolean;
   direction: Direction;
+  moreProps?: object | undefined;
 }
 
 const headerRow = css`
@@ -56,7 +57,8 @@ function HeaderRow<R, SR, K extends React.Key>({
   selectedCellIdx,
   selectCell,
   shouldFocusGrid,
-  direction
+  direction,
+  moreProps
 }: HeaderRowProps<R, SR, K>) {
   const cells = [];
   for (let index = 0; index < columns.length; index++) {
@@ -80,6 +82,7 @@ function HeaderRow<R, SR, K extends React.Key>({
         selectCell={selectCell}
         shouldFocusGrid={shouldFocusGrid && index === 0}
         direction={direction}
+        moreProps={moreProps}
       />
     );
   }

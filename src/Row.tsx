@@ -30,6 +30,7 @@ function Row<R, SR>(
     onMouseEnter,
     onRowChange,
     selectCell,
+    moreProps,
     ...props
   }: RowRendererProps<R, SR>,
   ref: React.Ref<HTMLDivElement>
@@ -82,6 +83,7 @@ function Row<R, SR>(
           onRowDoubleClick={onRowDoubleClick}
           onRowChange={handleRowChange}
           selectCell={selectCell}
+          moreProps={moreProps}
         />
       );
     }

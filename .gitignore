@@ -1,7 +1,7 @@
 /.linaria-cache
 /coverage
 /dist
-/lib
+# /lib
 /node_modules
 /tmp
 /.eslintcache
@@ -9,3 +9,4 @@
 
 npm-debug.log
 **.orig
+yarn.lock

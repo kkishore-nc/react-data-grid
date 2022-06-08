@@ -30,6 +30,7 @@ interface Props<R, SR> extends Pick<DataGridProps<R, SR>, 'rows' | 'onRowsChange
   onFill: (event: FillEvent<R>) => R;
   setDragging: (isDragging: boolean) => void;
   setDraggedOverRowIdx: (overRowIdx: number | undefined) => void;
+  moreProps?: object | undefined;
 }
 
 export default function DragHandle<R, SR>({
