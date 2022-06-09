@@ -4,6 +4,8 @@ import type { Key } from 'react';
 import { Provider } from 'react';
 import type { ReactElement } from 'react';
 import { RefAttributes } from 'react';
+import { RefObject } from 'react';
+import { useEffect } from 'react';
 
 export declare interface CalculatedColumn<TRow, TSummaryRow = unknown> extends Column<TRow, TSummaryRow> {
     readonly idx: number;
@@ -14,6 +16,15 @@ export declare interface CalculatedColumn<TRow, TSummaryRow = unknown> extends C
     readonly isLastFrozenColumn: boolean;
     readonly rowGroup: boolean;
     readonly formatter: ComponentType<FormatterProps<TRow, TSummaryRow>>;
+}
+
+declare interface CalculatedColumnsArgs<R, SR> extends Pick<DataGridProps<R, SR>, 'defaultColumnOptions'> {
+    rawColumns: readonly Column<R, SR>[];
+    rawGroupBy: Maybe<readonly string[]>;
+    viewportWidth: number;
+    scrollLeft: number;
+    columnWidths: ReadonlyMap<string, number>;
+    enableVirtualization: boolean;
 }
 
 export declare type CellNavigationMode = 'NONE' | 'CHANGE_ROW' | 'LOOP_OVER_ROW';
@@ -94,6 +105,11 @@ export declare interface Column<TRow, TSummaryRow = unknown> {
     /** Header renderer for each header cell */
     readonly headerRenderer?: Maybe<ComponentType<HeaderRendererProps<TRow, TSummaryRow>>>;
     moreProps?: object | undefined;
+}
+
+declare interface ColumnMetric {
+    width: number;
+    left: number;
 }
 
 declare interface Components<TRow, TSummaryRow> {
@@ -362,8 +378,80 @@ export declare function TextEditor<TRow, TSummaryRow>({ row, column, onRowChange
 
 export declare function ToggleGroupFormatter<R, SR>({ groupKey, isExpanded, isCellSelected, toggleGroup }: GroupFormatterProps<R, SR>): JSX.Element;
 
+export declare function useCalculatedColumns<R, SR>({ rawColumns, columnWidths, viewportWidth, scrollLeft, defaultColumnOptions, rawGroupBy, enableVirtualization }: CalculatedColumnsArgs<R, SR>): {
+    columns: readonly CalculatedColumn<R, SR>[];
+    colSpanColumns: readonly CalculatedColumn<R, SR>[];
+    colOverscanStartIdx: number;
+    colOverscanEndIdx: number;
+    layoutCssVars: Readonly<Record<string, string>>;
+    columnMetrics: ReadonlyMap<CalculatedColumn<R, SR>, ColumnMetric>;
+    lastFrozenColumnIndex: number;
+    totalFrozenColumnWidth: number;
+    groupBy: readonly string[];
+};
+
+export declare function useFocusRef<T extends HTMLOrSVGElement>(isSelected: boolean): {
+    ref: RefObject<T>;
+    tabIndex: number;
+};
+
+export declare function useGridDimensions(): [
+ref: React.RefObject<HTMLDivElement>,
+width: number,
+height: number
+];
+
+export declare function useLatestFunc<T extends (...args: any[]) => any>(fn: T): (...args: Parameters<T>) => void;
+
+export declare const useLayoutEffect: typeof useEffect;
+
+export declare function useRovingCellRef(isSelected: boolean): {
+    ref: ((cell: HTMLDivElement | null) => void) | undefined;
+    tabIndex: number;
+    onFocus: ((event: React.FocusEvent<HTMLDivElement>) => void) | undefined;
+};
+
 export declare function useRowSelection<R>(): [boolean, (selectRowEvent: SelectRowEvent<R>) => void];
 
+export declare function useViewportColumns<R, SR>({ columns, colSpanColumns, rows, summaryRows, colOverscanStartIdx, colOverscanEndIdx, lastFrozenColumnIndex, rowOverscanStartIdx, rowOverscanEndIdx, isGroupRow }: ViewportColumnsArgs<R, SR>): readonly CalculatedColumn<R, SR>[];
+
+export declare function useViewportRows<R>({ rawRows, rowHeight, clientHeight, scrollTop, groupBy, rowGrouper, expandedGroupIds, enableVirtualization }: ViewportRowsArgs<R>): {
+    rowOverscanStartIdx: number;
+    rowOverscanEndIdx: number;
+    rows: readonly (R | GroupRow<R>)[];
+    rowsCount: number;
+    totalRowHeight: number;
+    gridTemplateRows: string;
+    isGroupRow: (row: R | GroupRow<R>) => row is GroupRow<R>;
+    getRowTop: (rowIdx: number) => number;
+    getRowHeight: (rowIdx: number) => number;
+    findRowIdx: (offset: number) => number;
+};
+
 export declare function ValueFormatter<R, SR>(props: FormatterProps<R, SR>): JSX.Element | null;
+
+declare interface ViewportColumnsArgs<R, SR> {
+    columns: readonly CalculatedColumn<R, SR>[];
+    colSpanColumns: readonly CalculatedColumn<R, SR>[];
+    rows: readonly (R | GroupRow<R>)[];
+    summaryRows: Maybe<readonly SR[]>;
+    colOverscanStartIdx: number;
+    colOverscanEndIdx: number;
+    lastFrozenColumnIndex: number;
+    rowOverscanStartIdx: number;
+    rowOverscanEndIdx: number;
+    isGroupRow: (row: R | GroupRow<R>) => row is GroupRow<R>;
+}
+
+declare interface ViewportRowsArgs<R> {
+    rawRows: readonly R[];
+    rowHeight: number | ((args: RowHeightArgs<R>) => number);
+    clientHeight: number;
+    scrollTop: number;
+    groupBy: readonly string[];
+    rowGrouper: Maybe<(rows: readonly R[], columnKey: string) => Record<string, readonly R[]>>;
+    expandedGroupIds: Maybe<ReadonlySet<unknown>>;
+    enableVirtualization: boolean;
+}
 
 export { }

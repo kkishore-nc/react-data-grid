@@ -5,7 +5,17 @@ export * from './Columns';
 export * from './formatters';
 export { default as TextEditor } from './editors/TextEditor';
 export { default as HeaderRenderer } from './HeaderRenderer';
-export { useRowSelection } from './hooks';
+export {
+  useCalculatedColumns,
+  useFocusRef,
+  useGridDimensions,
+  useLatestFunc,
+  useLayoutEffect,
+  useRovingCellRef,
+  useRowSelection,
+  useViewportColumns,
+  useViewportRows
+} from './hooks';
 export type {
   Column,
   CalculatedColumn,
