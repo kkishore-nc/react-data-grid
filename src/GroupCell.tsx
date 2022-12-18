@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { getCellStyle, getCellClassname } from './utils';
-import type { CalculatedColumn, GroupRow } from './types';
+import type { CalculatedColumn, GroupRow, Maybe } from './types';
 import type { GroupRowRendererProps } from './GroupRow';
 import { useRovingCellRef } from './hooks';
 
@@ -16,6 +16,7 @@ interface GroupCellProps<R, SR> extends SharedGroupRowRendererProps<R, SR> {
   isCellSelected: boolean;
   groupColumnIndex: number;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 function GroupCell<R, SR>({
@@ -28,7 +29,8 @@ function GroupCell<R, SR>({
   row,
   groupColumnIndex,
   toggleGroup: toggleGroupWrapper,
-  moreProps
+  moreProps,
+  'data-testid': testId
 }: GroupCellProps<R, SR>) {
   const { ref, tabIndex, onFocus } = useRovingCellRef(isCellSelected);
 
@@ -54,6 +56,7 @@ function GroupCell<R, SR>({
       }}
       onClick={isLevelMatching ? toggleGroup : undefined}
       onFocus={onFocus}
+      data-testid={`${testId}-column-${column.idx + 1}`}
     >
       {(!column.rowGroup || groupColumnIndex === column.idx) && column.groupFormatter && (
         <column.groupFormatter
@@ -65,6 +68,7 @@ function GroupCell<R, SR>({
           isCellSelected={isCellSelected}
           toggleGroup={toggleGroup}
           moreProps={moreProps}
+          data-testid={`${testId}-column-${column.idx + 1}`}
         />
       )}
     </div>

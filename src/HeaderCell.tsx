@@ -1,6 +1,6 @@
 import { css } from '@linaria/core';
 
-import type { CalculatedColumn, SortColumn } from './types';
+import type { CalculatedColumn, Maybe, SortColumn } from './types';
 import type { HeaderRowProps } from './HeaderRow';
 import DefaultHeaderRenderer from './HeaderRenderer';
 import { getCellStyle, getCellClassname, clampColumnWidth } from './utils';
@@ -39,6 +39,7 @@ export interface HeaderCellProps<R, SR> extends SharedHeaderRowProps<R, SR> {
   colSpan: number | undefined;
   isCellSelected: boolean;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export default function HeaderCell<R, SR>({
@@ -53,7 +54,8 @@ export default function HeaderCell<R, SR>({
   selectCell,
   shouldFocusGrid,
   direction,
-  moreProps
+  moreProps,
+  'data-testid': testId
 }: HeaderCellProps<R, SR>) {
   const isRtl = direction === 'rtl';
   const { ref, tabIndex, onFocus } = useRovingCellRef(isCellSelected);
@@ -184,6 +186,7 @@ export default function HeaderCell<R, SR>({
       onClick={onClick}
       onDoubleClick={column.resizable ? onDoubleClick : undefined}
       onPointerDown={column.resizable ? onPointerDown : undefined}
+      data-testid={`${testId}-column-${column.idx + 1}`}
     >
       <HeaderRenderer
         column={column}
@@ -194,6 +197,7 @@ export default function HeaderCell<R, SR>({
         onAllRowsSelectionChange={onAllRowsSelectionChange}
         isCellSelected={isCellSelected}
         moreProps={moreProps}
+        data-testid={`${testId}-column-${column.idx + 1}`}
       />
     </div>
   );

@@ -5,7 +5,7 @@ import { css } from '@linaria/core';
 import { cell, row, rowClassname, rowSelectedClassname } from './style';
 import { getColSpan, getRowStyle } from './utils';
 import SummaryCell from './SummaryCell';
-import type { CalculatedColumn, RowRendererProps } from './types';
+import type { CalculatedColumn, Maybe, RowRendererProps } from './types';
 
 type SharedRowRendererProps<R, SR> = Pick<
   RowRendererProps<R, SR>,
@@ -21,6 +21,7 @@ interface SummaryRowProps<R, SR> extends SharedRowRendererProps<R, SR> {
   selectedCellIdx: number | undefined;
   selectCell: (row: SR, column: CalculatedColumn<R, SR>) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 const summaryRow = css`

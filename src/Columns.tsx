@@ -16,6 +16,7 @@ function SelectFormatter(props: FormatterProps<unknown>) {
         onRowSelectionChange({ row: props.row, checked, isShiftClick });
       }}
       moreProps={props.moreProps}
+      data-testid={props['data-testid']}
     />
   );
 }
@@ -32,6 +33,7 @@ function SelectGroupFormatter(props: GroupFormatterProps<unknown>) {
         onRowSelectionChange({ row: props.row, checked, isShiftClick: false });
       }}
       moreProps={props.moreProps}
+      data-testid={props['data-testid']}
     />
   );
 }
@@ -54,6 +56,7 @@ export const SelectColumn: Column<any, any> = {
         value={props.allRowsSelected}
         onChange={props.onAllRowsSelectionChange}
         moreProps={props.moreProps}
+        data-testid={props['data-testid']}
       />
     );
   },

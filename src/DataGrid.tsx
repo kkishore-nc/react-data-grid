@@ -230,7 +230,7 @@ function DataGrid<R, SR, K extends Key>(
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
     'aria-describedby': ariaDescribedBy,
-    'data-testid': testId,
+    'data-testid': testId = 'data-grid',
     moreProps
   }: DataGridProps<R, SR, K>,
   ref: React.Ref<DataGridHandle>
@@ -1027,6 +1027,11 @@ function DataGrid<R, SR, K extends Key>(
             aria-posinset={row.posInSet + 1} // aria-posinset is 1-based
             aria-rowindex={headerRowsCount + startRowIndex + 1} // aria-rowindex is 1 based
             aria-selected={isSelectable ? isGroupRowSelected : undefined}
+            data-testid={
+              testId
+                ? `${testId}-level-${row.level + 1}-row-${headerRowsCount + startRowIndex + 1}`
+                : `level-${row.level + 1}-row-${headerRowsCount + startRowIndex + 1}`
+            }
             key={row.id}
             id={row.id}
             groupKey={row.groupKey}
@@ -1062,6 +1067,11 @@ function DataGrid<R, SR, K extends Key>(
         <RowRenderer
           aria-rowindex={headerRowsCount + (hasGroups ? startRowIndex : rowIdx) + 1} // aria-rowindex is 1 based
           aria-selected={isSelectable ? isRowSelected : undefined}
+          data-testid={
+            testId
+              ? `${testId}-row-${headerRowsCount + (hasGroups ? startRowIndex : rowIdx) + 1}`
+              : `row-${headerRowsCount + (hasGroups ? startRowIndex : rowIdx) + 1}`
+          }
           key={key}
           rowIdx={rowIdx}
           row={row}
@@ -1180,6 +1190,7 @@ function DataGrid<R, SR, K extends Key>(
           shouldFocusGrid={!selectedCellIsWithinSelectionBounds}
           direction={direction}
           moreProps={moreProps}
+          data-testid={testId}
         />
         {rows.length === 0 && noRowsFallback ? (
           noRowsFallback

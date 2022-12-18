@@ -3,7 +3,7 @@ import { css } from '@linaria/core';
 
 import { useLatestFunc } from './hooks';
 import { getCellStyle, getCellClassname, onEditorNavigation } from './utils';
-import type { CellRendererProps, EditorProps, Omit } from './types';
+import type { CellRendererProps, EditorProps, Maybe, Omit } from './types';
 
 /*
  * To check for outside `mousedown` events, we listen to all `mousedown` events at their birth,
@@ -34,6 +34,7 @@ interface EditCellProps<R, SR>
     SharedCellRendererProps<R, SR> {
   closeEditor: () => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export default function EditCell<R, SR>({

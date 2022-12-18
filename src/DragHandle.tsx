@@ -1,6 +1,6 @@
 import { css } from '@linaria/core';
 
-import type { CalculatedColumn, FillEvent, Position } from './types';
+import type { CalculatedColumn, FillEvent, Maybe, Position } from './types';
 import type { DataGridProps, SelectCellState } from './DataGrid';
 
 const cellDragHandle = css`
@@ -31,6 +31,7 @@ interface Props<R, SR> extends Pick<DataGridProps<R, SR>, 'rows' | 'onRowsChange
   setDragging: (isDragging: boolean) => void;
   setDraggedOverRowIdx: (overRowIdx: number | undefined) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export default function DragHandle<R, SR>({

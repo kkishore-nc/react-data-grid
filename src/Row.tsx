@@ -84,6 +84,7 @@ function Row<R, SR>(
           onRowChange={handleRowChange}
           selectCell={selectCell}
           moreProps={moreProps}
+          data-testid={props['data-testid']}
         />
       );
     }

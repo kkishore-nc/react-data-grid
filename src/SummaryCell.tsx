@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { css } from '@linaria/core';
 
 import { getCellStyle, getCellClassname } from './utils';
-import type { CalculatedColumn, CellRendererProps } from './types';
+import type { CalculatedColumn, CellRendererProps, Maybe } from './types';
 import { useRovingCellRef } from './hooks';
 
 export const summaryCellClassname = css`
@@ -18,6 +18,7 @@ interface SharedCellRendererProps<R, SR>
 interface SummaryCellProps<R, SR> extends SharedCellRendererProps<R, SR> {
   row: SR;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 function SummaryCell<R, SR>({

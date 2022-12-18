@@ -82,6 +82,11 @@ function Cell<R, SR>({
       onContextMenu={handleContextMenu}
       onFocus={onFocus}
       {...props}
+      data-testid={
+        props['data-testid']
+          ? `${props['data-testid']}-column-${column.idx + 1}`
+          : `column-${column.idx + 1}`
+      }
     >
       {!column.rowGroup && (
         <>
@@ -91,6 +96,11 @@ function Cell<R, SR>({
             isCellSelected={isCellSelected}
             onRowChange={onRowChange}
             moreProps={moreProps}
+            data-testid={
+              props['data-testid']
+                ? `${props['data-testid']}-column-${column.idx + 1}`
+                : `column-${column.idx + 1}`
+            }
           />
           {dragHandle}
         </>

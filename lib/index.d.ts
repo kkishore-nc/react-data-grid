@@ -39,6 +39,7 @@ export declare interface CellRendererProps<TRow, TSummaryRow> extends Pick<RowRe
     dragHandle: ReactElement<React.HTMLAttributes<HTMLDivElement>> | undefined;
     onRowChange: (newRow: TRow) => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare const CheckboxFormatter: ForwardRefExoticComponent<CheckboxFormatterProps & RefAttributes<HTMLInputElement>>;
@@ -105,6 +106,7 @@ export declare interface Column<TRow, TSummaryRow = unknown> {
     /** Header renderer for each header cell */
     readonly headerRenderer?: Maybe<ComponentType<HeaderRendererProps<TRow, TSummaryRow>>>;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 declare interface ColumnMetric {
@@ -118,6 +120,7 @@ declare interface Components<TRow, TSummaryRow> {
     rowRenderer?: Maybe<ComponentType<RowRendererProps<TRow, TSummaryRow>>>;
     noRowsFallback?: Maybe<React.ReactNode>;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare interface CopyEvent<TRow> {
@@ -227,6 +230,7 @@ export declare interface EditorProps<TRow, TSummaryRow = unknown> {
     onRowChange: (row: TRow, commitChanges?: boolean) => void;
     onClose: (commitChanges?: boolean) => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare interface FillEvent<TRow> {
@@ -241,6 +245,7 @@ export declare interface FormatterProps<TRow, TSummaryRow = unknown> {
     isCellSelected: boolean;
     onRowChange: (row: TRow) => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare interface GroupFormatterProps<TRow, TSummaryRow = unknown> {
@@ -252,6 +257,7 @@ export declare interface GroupFormatterProps<TRow, TSummaryRow = unknown> {
     isCellSelected: boolean;
     toggleGroup: () => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 declare interface GroupRow<TRow> {
@@ -277,6 +283,7 @@ export declare interface HeaderRendererProps<TRow, TSummaryRow = unknown> {
     onAllRowsSelectionChange: (checked: boolean) => void;
     isCellSelected: boolean;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 declare type Maybe<T> = T | undefined | null;
@@ -325,6 +332,7 @@ export declare interface RowRendererProps<TRow, TSummaryRow = unknown> extends O
     setDraggedOverRowIdx: ((overRowIdx: number) => void) | undefined;
     selectCell: (row: TRow, column: CalculatedColumn<TRow, TSummaryRow>, enableEditor?: Maybe<boolean>) => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare interface RowsChangeData<R, SR = unknown> {
@@ -334,13 +342,14 @@ export declare interface RowsChangeData<R, SR = unknown> {
 
 export declare const SELECT_COLUMN_KEY = "select-row";
 
-export declare function SelectCellFormatter({ value, isCellSelected, disabled, onChange, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy }: SelectCellFormatterProps): JSX.Element;
+export declare function SelectCellFormatter({ value, isCellSelected, disabled, onChange, 'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy, 'data-testid': testId }: SelectCellFormatterProps): JSX.Element;
 
 declare interface SelectCellFormatterProps extends SharedInputProps {
     isCellSelected: boolean;
     value: boolean;
     onChange: (value: boolean, isShiftClick: boolean) => void;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare const SelectColumn: Column<any, any>;
@@ -365,6 +374,7 @@ export declare type SortDirection = 'ASC' | 'DESC';
 export declare interface SortIconProps {
     sortDirection: SortDirection | undefined;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare interface SummaryFormatterProps<TSummaryRow, TRow = unknown> {
@@ -372,6 +382,7 @@ export declare interface SummaryFormatterProps<TSummaryRow, TRow = unknown> {
     row: TSummaryRow;
     isCellSelected: boolean;
     moreProps?: object | undefined;
+    'data-testid'?: Maybe<string>;
 }
 
 export declare function TextEditor<TRow, TSummaryRow>({ row, column, onRowChange, onClose }: EditorProps<TRow, TSummaryRow>): JSX.Element;

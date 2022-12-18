@@ -52,6 +52,7 @@ export interface Column<TRow, TSummaryRow = unknown> {
   /** Header renderer for each header cell */
   readonly headerRenderer?: Maybe<ComponentType<HeaderRendererProps<TRow, TSummaryRow>>>;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface CalculatedColumn<TRow, TSummaryRow = unknown> extends Column<TRow, TSummaryRow> {
@@ -76,6 +77,7 @@ export interface FormatterProps<TRow, TSummaryRow = unknown> {
   isCellSelected: boolean;
   onRowChange: (row: TRow) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface SummaryFormatterProps<TSummaryRow, TRow = unknown> {
@@ -83,6 +85,7 @@ export interface SummaryFormatterProps<TSummaryRow, TRow = unknown> {
   row: TSummaryRow;
   isCellSelected: boolean;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface GroupFormatterProps<TRow, TSummaryRow = unknown> {
@@ -94,6 +97,7 @@ export interface GroupFormatterProps<TRow, TSummaryRow = unknown> {
   isCellSelected: boolean;
   toggleGroup: () => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface EditorProps<TRow, TSummaryRow = unknown> {
@@ -102,6 +106,7 @@ export interface EditorProps<TRow, TSummaryRow = unknown> {
   onRowChange: (row: TRow, commitChanges?: boolean) => void;
   onClose: (commitChanges?: boolean) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface HeaderRendererProps<TRow, TSummaryRow = unknown> {
@@ -113,6 +118,7 @@ export interface HeaderRendererProps<TRow, TSummaryRow = unknown> {
   onAllRowsSelectionChange: (checked: boolean) => void;
   isCellSelected: boolean;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface CellRendererProps<TRow, TSummaryRow>
@@ -130,6 +136,7 @@ export interface CellRendererProps<TRow, TSummaryRow>
   dragHandle: ReactElement<React.HTMLAttributes<HTMLDivElement>> | undefined;
   onRowChange: (newRow: TRow) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface RowRendererProps<TRow, TSummaryRow = unknown>
@@ -157,6 +164,7 @@ export interface RowRendererProps<TRow, TSummaryRow = unknown>
     enableEditor?: Maybe<boolean>
   ) => void;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface RowsChangeData<R, SR = unknown> {
@@ -220,6 +228,7 @@ export type RowHeightArgs<TRow> =
 export interface SortIconProps {
   sortDirection: SortDirection | undefined;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export interface CheckboxFormatterProps
@@ -239,6 +248,7 @@ export interface Components<TRow, TSummaryRow> {
   rowRenderer?: Maybe<ComponentType<RowRendererProps<TRow, TSummaryRow>>>;
   noRowsFallback?: Maybe<React.ReactNode>;
   moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 export type Direction = 'ltr' | 'rtl';

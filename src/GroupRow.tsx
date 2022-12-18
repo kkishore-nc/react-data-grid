@@ -5,7 +5,7 @@ import { css } from '@linaria/core';
 import { cell, cellFrozenLast, rowClassname, rowSelectedClassname } from './style';
 import { SELECT_COLUMN_KEY } from './Columns';
 import GroupCell from './GroupCell';
-import type { CalculatedColumn, GroupRow, Omit } from './types';
+import type { CalculatedColumn, GroupRow, Maybe, Omit } from './types';
 import { RowSelectionProvider } from './hooks';
 import { getRowStyle } from './utils';
 
@@ -25,7 +25,8 @@ export interface GroupRowRendererProps<R, SR>
   isRowSelected: boolean;
   selectGroup: (rowIdx: number) => void;
   toggleGroup: (expandedGroupId: unknown) => void;
-  moreProps: object | undefined;
+  moreProps?: object | undefined;
+  'data-testid'?: Maybe<string>;
 }
 
 const groupRow = css`
@@ -96,6 +97,7 @@ function GroupedRow<R, SR>({
             groupColumnIndex={idx}
             toggleGroup={toggleGroup}
             moreProps={moreProps}
+            data-testid={props['data-testid']}
           />
         ))}
       </div>
